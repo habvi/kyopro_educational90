@@ -1,5 +1,5 @@
 n = int(input())
-m = 1000
+m = 1001
 g = [[0] * m for _ in range(m)]
 for i in range(n):
     x1, y1, x2, y2 = map(int, input().split())
