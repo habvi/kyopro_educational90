@@ -18,7 +18,8 @@ if not dp[-1][-1]:
 ans = []
 j = s
 for i in reversed(range(1, n + 1)):
-    ans.append(dp[i][j])
-    j -= ab[i - 1]['AB'.index(dp[i][j])]
+    c = dp[i][j]
+    ans.append(c)
+    j -= ab[i - 1]['AB'.index(c)]
     
 print(''.join(ans[::-1]))
