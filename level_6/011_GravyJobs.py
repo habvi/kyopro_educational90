@@ -7,7 +7,7 @@ def solve2():
         ndp = [0] * (day + 1)
         for i in range(day + 1):
             ndp[i] = max(ndp[i], dp[i])
-            if i + c <= min(d, day):
+            if i + c <= d:
                 ndp[i + c] = max(ndp[i + c], dp[i] + s)
         dp = ndp
     print(max(dp))
