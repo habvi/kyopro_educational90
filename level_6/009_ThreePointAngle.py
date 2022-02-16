@@ -11,20 +11,20 @@ def check(x):
 
 ans = 0
 for i, (x1, y1) in enumerate(xy):
-    dgrs = set()
+    angles = set()
     for j, (x2, y2) in enumerate(xy):
         if i == j:
             continue
 
-        dgr = degrees(atan2(y2 - y1, x2 - x1))
-        dgrs.add(dgr if dgr >= 0 else dgr + 360)
+        angle = degrees(atan2(y2 - y1, x2 - x1))
+        angles.add(angle if angle >= 0 else angle + 360)
 
-    sd = sorted(dgrs)
-    m = len(sd)
+    sa = sorted(angles)
+    m = len(sa)
 
-    for j, dgr in enumerate(sd):
-        opposite = (dgr + 180) % 360
-        close = bisect(sd, opposite)
+    for j, angle in enumerate(sa):
+        opposite = (angle + 180) % 360
+        close = bisect(sa, opposite)
 
         l = close % m
         if l == j:
@@ -34,6 +34,6 @@ for i, (x1, y1) in enumerate(xy):
         if r == j:
             r -= 1
 
-        ans = max(ans, check(abs(dgr - sd[l])))
-        ans = max(ans, check(abs(dgr - sd[r])))
+        ans = max(ans, check(abs(angle - sa[l])))
+        ans = max(ans, check(abs(angle - sa[r])))
 print(ans)
