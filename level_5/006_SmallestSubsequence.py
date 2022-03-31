@@ -1,19 +1,33 @@
-n, k = map(int, input().split())
-s = input()
-idx = [[n] * 26 for _ in range(n + 1)]
-for i in range(n - 1, -1, -1):
-    for al in range(26):
-        if al == ord(s[i]) - ord('a'):
-            idx[i][al] = i
-        else:
-            idx[i][al] = idx[i + 1][al]
+def stoi(s):
+    return ord(s) - ord('a')
 
-ans = ""
-now = 0
-for cnt in range(k):
-    for al in range(26):
-        if k - cnt <= n - idx[now][al]:
-            ans += chr(al + ord('a'))
-            now = idx[now][al] + 1
+def itos(i):
+    return chr(i + ord('a'))
+
+def right_leftmost_idx(S):
+    n = len(S)
+    idx = [[n] * 26 for _ in range(n + 1)]
+    for i in reversed(range(n)):
+        for alph in range(26):
+            if stoi(S[i]) == alph:
+                idx[i][alph] = i
+            else:
+                idx[i][alph] = idx[i + 1][alph]
+    return idx
+
+
+n, K = map(int, input().split())
+S = input()
+
+idx = right_leftmost_idx(S)
+
+ans = []
+now = -1
+for times in range(K):
+    for alph in range(26):
+        nxt = idx[now + 1][alph]
+        if n - nxt >= K - times:
+            ans.append(itos(alph))
+            now = nxt
             break
-print(ans)
+print(''.join(ans))
